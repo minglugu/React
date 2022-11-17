@@ -109,3 +109,25 @@ npx stands for Node Package Execute
 
 - 自己创建一个component：src -> 右键新建一个file, component 文件名要uppercase。e.g. Weather.js
 
+- export App的方法
+   1. export const Weather = () => {}
+   2. const Weather = () => {}
+      write on the last line: export {Weather, Weather2, Weather3}
+
+   3. "export default App;" in App.js
+      pairs with
+      import App from './App';
+      用default，就不用{}
+   
+      每个文件只能用一个default，import default App的时候，就不用{}
+
+- state and hook
+   新建一个component：Calculator.js 
+   
+   hooks-useState
+   track data and property change, e.g. price change or weather change. A function updates the state
+   设置成state，react会识别，自动刷新. Calcualte.js example
+
+   在 App.js 里面，用 Calculator 的App
+   在 Calculator 里面，增加一个 按钮
+

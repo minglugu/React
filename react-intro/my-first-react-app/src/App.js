@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Weather, Weather2, Weather3 } from './Weather'; // import Weather.js这个App
+import { Calculator } from './Calculator';
 
 // this is function component
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Weather />
         <Weather2 />
         <Weather3 />
+        {/* Calculator component */}
+        <Calculator /> 
         <a
           className="App-link"
           href="https://reactjs.org"
