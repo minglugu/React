@@ -24,7 +24,6 @@ function App() {
         {/* 用 / 后，表示是一个元素 */}
         <Weather />
         <Weather2 />
-        <Weather3 />
         {/* Calculator component */}
         <Calculator /> 
         <a
