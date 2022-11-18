@@ -6,19 +6,22 @@ export const Calculator = () => {
     // myNumber is a state variable
     // setMyNumber is a function to update myNumber
     const [myNumber, setMyNumber] = useState(1)
-    // useState 的 hook 
+    // useState 是 hook 
     
-    // 比getElementbyId 简单
+    // 比Document.getElementbyId 简单
     const increaseNum = () => {
         // 写法 1
         // setMyNumber(myNumber+1)
 
-        // 写法 2 定义一个形参，解决async的问题when updating
+        // 写法 2 定义一个形参myNum，解决async的问题when updating
         setMyNumber(myNum => myNum + 1)
     }
 
+    // check the rendering order when Calculator app is imported in App.js
+    console.log('Calculator')
+
     return (
-        <div>
+        <div style={{border: '2px solid'}}>
             <h3>
                 Calculation result {myNumber}
             </h3>

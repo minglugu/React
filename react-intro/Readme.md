@@ -122,7 +122,7 @@ npx stands for Node Package Execute
       每个文件只能用一个default，import default App的时候，就不用{}
 
 - state and hook
-   新建一个component：Calculator.js 
+   1. 新建一个component：Calculator.js 
    
    hooks-useState
    track data and property change, e.g. price change or weather change. A function updates the state
@@ -130,4 +130,87 @@ npx stands for Node Package Execute
 
    在 App.js 里面，用 Calculator 的App
    在 Calculator 里面，增加一个 按钮
+
+   useState as a hook to update myNumber
+
+   2. useEffect() hook
+
+   3. 不同的component之间，数据的传输
+      先建立分支
+      git checkout -b use-effect    // 新建一个分支
+      git add .
+      git commit -m"use effect intro"
+      git branch --all    // 看里面有几个分支
+
+   4. Google markdown cheatsheet
+      to check README.md
+
+   5. How is virtual DOM rendered?
+      Only render the necessary component where the state(props) changes
+
+   6. parent component re-render 会造成所有的子类component re-render（刷新）. 可以通过 console.log 打印 每个component的名字，在devtool的console里面可以看到。但是如果只是 child component re-render,不会影响其它component （面试问题之一，怎么增加performance）。尽量将各种component独立开来。不要将App作为Calculator的父亲。
+   react.
+
+   7. const [number, setNumber] = useState(0)
+   Why does usestate use const?
+   Because useState are immutable. On this case they using const because this is array destruction instead of defining variables.
+
+   8. named export vs default export
+      https://medium.com/@etherealm/named-export-vs-default-export-in-es6-affb483a0910
+      named export vs default export
+      named export:
+      export const Weather = () => {
+
+      }
+
+      default export
+      export default Weather
+      同时，在import 的文件里面，要写import { Weather } from './Weather';
+
+
+   9. export default React.memo(Weather)   会在memo下面划线，需要import React from 'react';
+
+   10. React.memo() method: https://reactjs.org/docs/react-api.html#reactmemo
+       React.memo is a higher order component. 
+
+       If your component renders the same result given the same props, you can wrap it in a call to React.memo for a performance boost in some cases by memoizing the result(类似静态页面). This means that React will skip rendering the component, and reuse the last rendered result.
+       
+       React.memo only checks for prop changes. If your function component wrapped in React.memo has a useState, useReducer or useContext Hook in its implementation, it will still rerender when state or context change.
+
+       Hook API reference: https://reactjs.org/docs/hooks-reference.html#usememo
+
+       这两个hook：useMemo, useCallback
+       React.memo(useMemo, useCallback)
+       面试问题：How do you boost/imporve a performance of your react project? How do you solve the re-rendering issue in react.
+       useMemo: it returns a memoized value.
+
+       回答此类面试问题：解释re-render概念, component 概念，memo概念，useMemo 和 useCallback 可以减少re-render的issue
+
+   11. Three stages of React's component's lifecycle
+       1. initialize/mounting 
+       2. updating property/state
+       3. unmounting/destruction (类似 destroy/close) e.g. 关闭弹出的广告
+
+       interviewing question：what is React’s component lifecycle.
+       https://itnext.io/reacts-component-lifecycle-6c13e09d10ad
+
+       见Component Lifecycle的图，里面都是class
+
+       useEffect (callback function, [dependencies])  dependency是依赖，决定useEffect是否运行
+       用于 side effects：
+       1. timers (setInterval, setTimeout)-cleanup
+       2. fetch data（根据taobao浏览习惯，list 商品信息），写在 userEffect 里面
+       3. updating/measuring DOM: 计算render的东西有多大，点图标，做个购物车的特效动画，是从点击card的
+          地方，再跳到购物车。需要measure长宽高，大小会变，用于responsive
+       4. set/fetch/get value from your localStorage. load 界面的时候，从local storage存储的地方，拿到之前存储的数据。
+       注意点：some effects need to be cleaned up to avoid memory leak。
+
+       a)useEffect(func, [])
+       when the dependency is empty[] = componentDidMount(). 只运行一次,先运行return，再运行useEffect
+       刷新页面，只是render return里面的部分，而不是useEffect()
+
+       b)useEffect(func)
+       when there is no dependency = componentDidMount + componentDidUpdate
+
+
 
