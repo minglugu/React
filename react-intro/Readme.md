@@ -202,7 +202,10 @@ npx stands for Node Package Execute
        2. fetch data（根据taobao浏览习惯，list 商品信息），写在 userEffect 里面
        3. updating/measuring DOM: 计算render的东西有多大，点图标，做个购物车的特效动画，是从点击card的
           地方，再跳到购物车。需要measure长宽高，大小会变，用于responsive
-       4. set/fetch/get value from your localStorage. load 界面的时候，从local storage存储的地方，拿到之前存储的数据。
+       4. set/fetch/get value from your localStorage. load 界面的时候，从local storage存储的地方，拿到之
+       前存储的数据。
+       5. add event listener - clean up
+          setInterval - clean up
        注意点：some effects need to be cleaned up to avoid memory leak。
 
        a)useEffect(func, [])
@@ -217,5 +220,9 @@ npx stands for Node Package Execute
        c)useEffect(func, [depend1, depend2...])
        when the dep is not empty, callback run is depending on the changes of dependencies
 
+   12. set timeout, set interval的时候，要注意，最后需要clear，否则会造成内存泄露
+       The best way in React to clear Timeouts and Intervals are by assinging ref to your interval/timeout functions which works flawlessly and use useRef () hook
+
+       
 
 
