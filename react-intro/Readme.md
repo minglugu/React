@@ -211,6 +211,11 @@ npx stands for Node Package Execute
 
        b)useEffect(func)
        when there is no dependency = componentDidMount + componentDidUpdate
+       不推荐此方法，因为每次刷新，都会render useEffect 部分。所以提问起，如何增加网页performance，那么
+       在useEffect这个方法里面，增加dependency这个参数
+
+       c)useEffect(func, [depend1, depend2...])
+       when the dep is not empty, callback run is depending on the changes of dependencies
 
 
 
