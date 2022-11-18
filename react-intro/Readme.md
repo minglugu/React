@@ -190,6 +190,10 @@ npx stands for Node Package Execute
        1. initialize/mounting 
        2. updating property/state
        3. unmounting/destruction (类似 destroy/close) e.g. 关闭弹出的广告
+       
+       面试问题：useLayoutEffect vs useEffect 
+       useLayoutEffect fires synchonously after all DOM mutations. 
+       更接近sync的状态. Measuring a box of sth or the width of a DOM component after a render occurs
 
        interviewing question：what is React’s component lifecycle.
        https://itnext.io/reacts-component-lifecycle-6c13e09d10ad
@@ -223,6 +227,63 @@ npx stands for Node Package Execute
    12. set timeout, set interval的时候，要注意，最后需要clear，否则会造成内存泄露
        The best way in React to clear Timeouts and Intervals are by assinging ref to your interval/timeout functions which works flawlessly and use useRef () hook
 
-       
 
+create a new branch       
+git checkout -b data-communication
 
+## data communication
+e.g. 目前有3个component（Clock, Calculator, and Weather to ） 和 parent component App
+     父亲的数值怎么传给孩子，孩子之间怎么传，孩子怎么传出去
+     举例，一个搜索框，输入城市名字，然后calculator的背景，就改成了搜索框里的城市的名字
+     a) 父亲传给孩子(用props)
+        Hello AB 后面的数值，传给Calculator，并放到后面
+        操作步骤：
+        1. 在App.js里面 function App() 的 <Calculator />里面，加入自定义变量，传入父元素的值
+        <Calculator dataFromApp = {number}/> 
+        2. 在Calculator.js 加入 props 这个形参（parameter）
+            写法1. export const Calculator = (props) => {}
+            写法2. export const Calculator = ({dataFromApp})
+        3. 在return里面，加入{props.dataFromApp}. 其中props是Calculator的形参，dataFromApp是
+        在App.js里面，Calculator 自定义的变量
+        <h2>
+            写法1.
+            from App {props.dataFromApp}
+            写法2. destruction 的写法
+            from App {dataFromApp}
+         </h2>
+
+      b) 子传父（传一个function，这边的例子时）
+         1. App.js
+         // Clock（子组件） 传给 App（父组件）的number2
+         const [number2, setNumber2] = useState(null)
+
+         2. // App.js         
+         // 跟孩子相连，setNumber2这个hook放到这个setNumber2里面
+         const setNumber2Fun = (number) => {
+           setNumber2(number)
+         }
+         3. // App.js
+         <Clock passDataFromChild = {setNumber2Fun} />
+         4. // Calculator.js
+         export const Clock = ({passDataFromChild}) => { 
+         }
+            // 子传父
+         passDataFromChild(number)
+
+      summary: data communication
+      1. parent component to child 
+         - in parent componentpass argument to child : <ChildComponent paramName = {argument}/>
+         - in child component, use it as an argument/parameter (prop.name) or {name}
+
+      2. child to parent
+         - in parent component, pass callback function to child in angle bracket: <ChildComponent name = {callback function}/>
+         - in child component, use it as an argument/parameter (prop.name) or {name}
+         to set the state of parentgit 
+
+      3. child a to child b
+         child a -> parent -> child b
+
+check branches git CLI: git branch --all
+switch branches: git checkout branchName
+
+切换branch，code的内容会不同。
