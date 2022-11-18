@@ -16,6 +16,14 @@ function App() {
 
   const [number, setNumber] = useState(0)
 
+  // clock（子组件） 传给 App（父组件）的number2
+  const [number2, setNumber2] = useState(null)
+  // 跟孩子相连，setNumber2这个hook放到这个function里面
+  const setNumber2Fun = (number) => {
+    setNumber2(number)
+  }
+
+
   // return here, and it will render automatically
   return (
     <div className="App">
@@ -30,7 +38,7 @@ function App() {
           Hello, {name} {number}. 
         </h1>
         <p style={myPStyle}>
-          This is my {1+2} react app(s).
+          This is my 1st react app, {number2}.
         </p>
         {/* 使用 Weather.js 里面的 Weather function */}
         {/* 用 / 后，表示是一个元素 */}
@@ -38,9 +46,11 @@ function App() {
         <hr/>
         {/* <Weather2 /> */}
         {/* Calculator as a component */}
-        <Calculator /> 
+        {/* 将父组件的number，传给计算器后面，自定义变量dataFromApp */}
+        <Calculator dataFromApp = {number}/> 
         <hr/>
-        <Clock />
+        {/* 将 */}
+        <Clock passDataFromChild = {setNumber2Fun} />
         {/* <a
           className="App-link"
           href="https://reactjs.org"

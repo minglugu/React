@@ -1,8 +1,8 @@
 // 点击按钮，增加 1，变化来自于 state 的更新
 
 import { useState } from "react";
-
-export const Calculator = () => { 
+// 
+export const Calculator = (props) => { 
     // myNumber is a state variable
     // setMyNumber is a function to update myNumber
     const [myNumber, setMyNumber] = useState(1)
@@ -25,6 +25,9 @@ export const Calculator = () => {
             <h3>
                 Calculation result {myNumber}
             </h3>
+            <h2 style={{color: 'red'}}>
+                from App {props.dataFromApp}. An example of passing parent component to child one.
+            </h2>
             <button onClick={increaseNum}>click me</button>
 
         </div>

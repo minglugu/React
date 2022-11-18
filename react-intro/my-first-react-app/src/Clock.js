@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const Clock = () => { 
+export const Clock = ({passDataFromChild}) => { 
     // 写code的顺序：const和hook定义在前面。return写在下面，用来render网页的。
     
     const deps = 'AB'
@@ -13,6 +13,7 @@ export const Clock = () => {
         // setInterval里面有callback的函数，设置了一个1秒的间隔，表示每隔1秒，call back这个函数
         // 将setInterval赋值给timerId，再return 一个call back function 叫clearInterval()
         let timerId = setInterval(() => {
+            // async
             setNumber(x => x + 1)
         }, 1000)
 
@@ -25,6 +26,13 @@ export const Clock = () => {
     // ist param is callback function, second param is dependencies
     // 1. when the dependency is empty[], componentDidMount
      useEffect(increaseNum, [])
+
+     // update value for async. 当number变化时，运行这个程序
+     useEffect(
+              () => {
+                passDataFromChild(number)
+              }, [number]
+     )
 
     // 2. when there is no dependency, componentDidMount + componentDidUpdate
     // 每次刷新， useEffect都会update，不推荐此方法。谨慎使用。
