@@ -186,7 +186,7 @@ npx stands for Node Package Execute
 
        回答此类面试问题：解释re-render概念, component 概念，memo概念，useMemo 和 useCallback 可以减少re-render的issue
 
-   11. Three stages of React's component's lifecycle
+   11. Three stages of React's component's lifecycle(常见的面试题)
        1. initialize/mounting 
        2. updating property/state
        3. unmounting/destruction (类似 destroy/close) e.g. 关闭弹出的广告
@@ -252,7 +252,7 @@ e.g. 目前有3个component（Clock, Calculator, and Weather to ） 和 parent c
             from App {dataFromApp}
          </h2>
 
-      b) 子传父（传一个function，这边的例子时）
+      b) 子传父（传一个function，这边的例子）
          1. App.js
          // Clock（子组件） 传给 App（父组件）的number2
          const [number2, setNumber2] = useState(null)
