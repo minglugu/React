@@ -5,7 +5,7 @@ import { DisplayCityView } from './DisplayCityView';
 import { useState } from 'react';
 
 function App() {
-  const [name, setName] = useState(null)
+  // const [name, setName] = useState(null)
 
   // create a state to store the results fetched by child
   // hook 传给孩子，孩子更新后，调用updateImgList, 再调用 setImgList,然后父亲就可以用images了
@@ -17,21 +17,23 @@ function App() {
   // setName 放到function updateName 里面
   // create a function to accept the value from child and set state(setName)
   // 传递child value的过程：child component的value，pass into function updateName()。
-  const updateName = (nameValue) => {
-    // console.log(nameValue)
-    setName(nameValue)
-  }
+  // const updateName = (nameValue) => {
+  //   // console.log(nameValue)
+  //   setName(nameValue)
+  // }
 
   // a function converts all letters to uppercase
-  const conversion = () => {
-      setName(name => name.toUpperCase())
-  }
+  // const conversion = () => {
+  //     setName(name => name.toUpperCase())
+  // }
 
   return (
     <div className="App">
       {/* 引用search bar这个元素 */}
-      <h1>Parent:</h1>
-      <p> {name} </p>
+      {/* render的时候，用imgList.length !== 0 && 判断是否为空，否则会报错。 */}
+      {/* {<h1></h1>}的大括号，是说明要写JSX */}
+      {imgList.length !== 0 && <h1>{imgList[0].des}</h1>}
+      {/* <p> {name} </p> */}
 
       {/* show imgList[], 是array，要JSON.stringify */}
       {/* 当在SearchBarCityView里，输入城市名字，就会传给parent，
@@ -44,7 +46,7 @@ function App() {
       export const SearchBar = ({updateAName})*/}
       {/* <SearchBar updateAName = {updateName}/> */}
       <SearchBarCityView 
-          updateAName = {updateName}
+          // updateAName = {updateName}
           updateCityImg = {updateImgList}/>
       <hr/>
       {/* Parent component value is passed to child component
@@ -55,8 +57,11 @@ function App() {
         conversion = {conversion}  
       /> */}
       <DisplayCityView 
-        newName = {name} 
-        conversionCityName = {conversion}  
+        // 父传子 
+        imgList = {imgList} 
+
+        // newName = {name} 
+        // conversionCityName = {conversion}  
       />
       {/* 拿到搜索结果的第0个元素的URL, 需要加判断，是否为空。
           if imgList[] 是否为empty: imgList.length !== 0
@@ -69,7 +74,8 @@ function App() {
           width: '100',
           position: 'absolute'
         }} 
-        src={imgList[0].urls.regular} alt=""/>}
+
+        src={imgList[0].regular} alt={imgList[0].des}/>}
     </div>
   );
 }
