@@ -91,7 +91,7 @@ export const SearchBarCityView = ({updateCityImg}) => {
 
                 // re-organize the data structure of {results}
                 // 只需要传这三个内容
-                // [{des:'', regular:'', thumb:''}, {} ... {}]
+                // [{des:'value', regular:'value', thumb:'value'}, {} ... {}]
                 // 返回的是数组[{}]类型，里面的元素是object(README.md line 114)
                 // item是指array的其中一个元素，比如说index为0的元素
                 // des是自定义的, item是map里面的变量，将item这个变量下面的alt_description(这个写法是devtools里面，console显示出来的固定写法)
@@ -101,7 +101,7 @@ export const SearchBarCityView = ({updateCityImg}) => {
                     regular: item.urls.regular,
                     thumb: item.urls.thumb 
                 }))
-                // newRes will show des, regular, thumb information
+                // Check newRes in devtools' console, and it will show des, regular, thumb information
                 /* 
                  des: "body of water under white cloudy sky"
                  regular: "https://images.unsplash.com/photo-1506751470038-e579eb9

@@ -117,7 +117,20 @@ jsonviewer.stack.hu
 功能：显示fetch的小品图标(thumb):
 用array(imgList)来render 小图标。
 在DisplayCityView.js里面，输入这一行：{imgList.map((item, index) => <img src={item.thumb} alt=""/>)}
-不限于img，也可以自定义component，在页面上显示出自己的东西
+不限于img，也可以自定义component，在页面上显示出自己写的东西
+
+当imgList的thumb小图标，全部render到网页上。DisplayCityView.js里面，关键的是这几行代码，
+起到了render小图标的作用。
+{imgList.map((item, index) => <img 
+   key={index}
+   src={item.thumb} 
+   alt=""/>)}
+
+
+eventListener in React: 通常写法是inline的写法，不需要通过其它动态的方式来写。
+URL: https://reactjs.org/docs/handling-events.html
+1. 要在每个image上，加一个click事件，onClick(), 可以夹在map上，那么每个图片，就加上了onclick事件。
+2. 
 
 
 

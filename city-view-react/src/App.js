@@ -5,6 +5,12 @@ import { DisplayCityView } from './DisplayCityView';
 import { useState } from 'react';
 
 function App() {
+  // create a state to store the index of clicked image from child component
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  // 传简单的参数，可以直接这么写。传object和array，用箭头函数写
+  const updateIndex = value => setSelectedIndex(value)
+
+
   // const [name, setName] = useState(null)
 
   // create a state to store the results fetched by child
@@ -32,7 +38,9 @@ function App() {
       {/* 引用search bar这个元素 */}
       {/* render的时候，用imgList.length !== 0 && 判断是否为空，否则会报错。 */}
       {/* {<h1></h1>}的大括号，是说明要写JSX */}
-      {imgList.length !== 0 && <h1>{imgList[0].des}</h1>}
+      {/* 将fetch到的image的des 打印到component上面。但是需要判断一下是否为空，
+          (也就是说获取的 imgList 的长度是否为0) */}
+      {imgList.length !== 0 && <h1>{imgList[selectedIndex].des}</h1>}
       {/* <p> {name} </p> */}
 
       {/* show imgList[], 是array，要JSON.stringify */}
@@ -59,10 +67,12 @@ function App() {
       <DisplayCityView 
         // 父传子 
         imgList = {imgList} 
-
-        // newName = {name} 
-        // conversionCityName = {conversion}  
+        // 父传子，传个function
+        updateIndex = {updateIndex}
       />
+     {/* newName = {name} 
+         conversionCityName = {conversion}   */}
+      
       {/* 拿到搜索结果的第0个元素的URL, 需要加判断，是否为空。
           if imgList[] 是否为empty: imgList.length !== 0
           if imgList is an object, use !!imgList instead of imgList.length !== 0 to make sure the 
@@ -75,7 +85,7 @@ function App() {
           position: 'absolute'
         }} 
 
-        src={imgList[0].regular} alt={imgList[0].des}/>}
+        src={imgList[selectedIndex].regular} alt={imgList[selectedIndex].des}/>}
     </div>
   );
 }
