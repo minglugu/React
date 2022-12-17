@@ -58,7 +58,7 @@ export const SearchBarCityView = ({updateCityImg}) => {
     // inputCity 是定义的变量，
     const searchCity = inputCity => {
         // console.log(inputCity)
-        // fetch 方法,此处用第三方库，axiox是promise based HTTP client for the browser and node.js
+        // fetch 方法,此处用第三方库，axios是promise based HTTP client for the browser and node.js
         // npmjs.com/package/axios, cmd line: npm install axios
         // axios
         // https://api.unsplash.com/search/photos
@@ -103,6 +103,7 @@ export const SearchBarCityView = ({updateCityImg}) => {
                 }))
                 // Check newRes in devtools' console, and it will show des, regular, thumb information
                 /* 
+                 for example:
                  des: "body of water under white cloudy sky"
                  regular: "https://images.unsplash.com/photo-1506751470038-e579eb9
                  thumb: "https://images.unsplash.com/photo-1507992781348-310259076fe0?crop=entropy&cs=t

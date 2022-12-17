@@ -29,7 +29,7 @@ export const DisplayCityView = ({imgList, updateIndex}) => {
                 onClick={()=>updateIndex(index)}
 
                 // 需要给图片写上 index，增加网页的performance的功能
-                // 需要加上这个key 
+                // 需要加上这个key
                 key={index}
                 // 非常常用的react的方法，用array(imgList)来获取到一组小图标(thumb)以后，
                 // render 到网页上面。

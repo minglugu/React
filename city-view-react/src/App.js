@@ -5,6 +5,7 @@ import { DisplayCityView } from './DisplayCityView';
 import { useState } from 'react';
 
 function App() {
+  // Declare a new state variable called "selectedIndex"
   // create a state to store the index of clicked image from child component
   const [selectedIndex, setSelectedIndex] = useState(0)
   // 传简单的参数，可以直接这么写。传object和array，用箭头函数写
