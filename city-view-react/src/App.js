@@ -7,6 +7,7 @@ import { useState } from 'react';
 function App() {
   // Declare a new state variable called "selectedIndex"
   // create a state to store the index of clicked image from child component
+  // set the intial value to the element of 0 index
   const [selectedIndex, setSelectedIndex] = useState(0)
   // 传简单的参数，可以直接这么写。传object和array，用箭头函数写
   const updateIndex = value => setSelectedIndex(value)
@@ -14,7 +15,7 @@ function App() {
 
   // const [name, setName] = useState(null)
 
-  // create a state to store the results fetched by child
+  // create a state to store the selected index from child
   // hook 传给孩子，孩子更新后，调用updateImgList, 再调用 setImgList,然后父亲就可以用images了
   // 下面两行代码，用来更新获取到的 imgList
   // 因为imgList是空的array,所以初始值设为 []
@@ -56,7 +57,10 @@ function App() {
       {/* <SearchBar updateAName = {updateName}/> */}
       <SearchBarCityView 
           // updateAName = {updateName}
-          updateCityImg = {updateImgList}/>
+          updateCityImg = {updateImgList}
+          updateIndex = {updateIndex}    
+          
+      />
       <hr/>
       {/* Parent component value is passed to child component
       e.g. {name} is parent component value, passing it to a variable newName in <Display /> here
@@ -66,7 +70,8 @@ function App() {
         conversion = {conversion}  
       /> */}
       <DisplayCityView 
-        // 父传子 
+        // 父传子, 前面的imgList是自定义变量，作为DisplayCityView.js的参数，传进去。后面的{imgList}，
+        // 是拿到的 parent component 的值。 
         imgList = {imgList} 
         // 父传子，传个function
         updateIndex = {updateIndex}

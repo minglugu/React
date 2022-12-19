@@ -11,7 +11,7 @@ import { useEffect, useState } from "react"
 const unsplashKey = 'cVWfiLOQxMydkNinizISK4yfjCh_3xmO7QvoIoLB8ZA'
 const unsplashURL = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateCityImg}) => {
+export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
     // define state的变量为inputName, 因为名字一变化，就调用useEffect。
     const [inputName, setInputName] = useState('Toronto');
 
@@ -38,6 +38,9 @@ export const SearchBarCityView = ({updateCityImg}) => {
         // print out "Enter" in the console
         // console.log(event.key) 
         if (event.key === 'Enter') {
+            // 当key down的时候，把updated index 归0
+            updateIndex(0)
+
             // 先用getElementById()选中id的标签，然后用select()的方法。当hit Enter键时，那就全部选中输入的内容
             // 这样重新输入内容时，不用一直按 backspace 来清空search bar
             // 英文的解释：js syntax can be used in React, when hit enter, all texts in the input box will be selected

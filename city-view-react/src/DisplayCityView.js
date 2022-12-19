@@ -1,7 +1,9 @@
+import './DisplayCityView.scss'
+
 // function of display, descturction 写法
 export const DisplayCityView = ({imgList, updateIndex}) => {
     return (
-        <div>
+        <div className='display-city-view-container'>
         {/* <div style={{border: '2px blue solid', width: '400px', height: '150px'}}>
             <label htmlFor="">Please input a name  </label>
             <h3>Display Child</h3> */}
@@ -23,7 +25,7 @@ export const DisplayCityView = ({imgList, updateIndex}) => {
                 // General idea: 要在每个image上，加一个click事件，onClick(), 可以加在map()返回的img图片上
                 // 那么每个图片，就加上了onclick事件。
 
-                // Pass the index of the clicked image to parent, 然后在parent里面，修改相应的代码
+                // Pass the index of the clicked image to parent(子传父), 然后在parent里面，修改相应的代码
                 // Parent component gets the index of child component, so setState of parent component to 
                 // update the index. 
                 onClick={()=>updateIndex(index)}

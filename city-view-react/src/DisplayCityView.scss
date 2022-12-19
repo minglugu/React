@@ -1,0 +1,26 @@
+.display-city-view-container {
+    position: fixed;
+    bottom: 10vh;
+    width: 80vw;
+    display: flex;
+    // 上下对齐
+    align-items: center;
+    // 左右排列
+    justify-content: center;
+    // img 前不要加".', 因为是scss selector的规范，直接call这个元素
+    img {
+        width: 100px;
+        height: 100px;
+        border: white 2px solid;
+        border-radius: 50%;
+        
+        transition: 0.2s linear all;
+        // 增加hover的一个动态效果: 放大1.2倍，向上(Y轴，纵向走10px)
+        &:hover {
+            transform: scale(1.2) translateY(-10px);
+            // 选中这个图，border就变色
+            border: turquoise 2px solid;
+        }
+    }
+    
+}

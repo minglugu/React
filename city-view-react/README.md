@@ -133,5 +133,18 @@ URL: https://reactjs.org/docs/handling-events.html
 2. 
 
 
+## 当新增DisplayCityView.scss文件的时候，运行项目，会发生错误。Cannot find module 'sass'
+解决的办法：在terminal里面，输入cmd line:
+npm i sass
+装完以后，可以在package.json里面，
+面试问题：什么是sass？SASS (Syntactically Awesome Style Sheets) is a pre-processor scripting language that will be compiled or interpreted into CSS。用来预处理css文件的。
 
+## 此时的问题是：image还是比较杂乱，需要定义image的样式。CSCC
+
+## Q: 当图片加载比较慢的时候，客户在等待search的结果的时候，要显示 loading 这个提示。
+   A: 直到图片全部加载完毕，loading才消失。如何操作：state何时可以设置为 true 还是 false。true是render，false是还没有render。loading放在哪个元素里，loading可以单独作为一个component。
+
+主要是useEffect and data communication这2个关键的概念。
+
+还有 增加左箭头和右箭头，在 SearchCityView.js 这个地方需要改动。 
 
