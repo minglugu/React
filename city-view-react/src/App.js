@@ -5,6 +5,25 @@ import { DisplayCityView } from './DisplayCityView';
 import { useState } from 'react';
 
 function App() {
+  // the following const page, nextPage and updatePage are used to control which page comes first
+
+  // line 13 和 19 是从SearchBarCityView.js 文件里面粘贴过来的。
+  // 先定义page state, default is 1. 问题：如何将setPage 这个参数，传到 DisplayCityView.js 里面去？
+  // 然后将page 这个 parameter 传给 SearchBarCityView.js，见line 77。然后到SearchBarCityView.js里，将page参数传入
+  const [page, setPage] = useState(1)
+
+  // 这里是通过父传子，来达到子传子(SearchBarCityView.js 传给 DisplayCityView.js)的操作。定义一个function called nextPage，
+  // 定义nextPage这个function， 通过父 App.js传给child component DisplayCityView.js（line 100），
+  // 就达到了 pass setPage to DisplayCityView.js 这个子传子的操作。传function的时候，就需要点击按钮，value需要加1，才能运行.
+  // 此处写 ()=> 是因为没有传任何参数。
+  const nextPage = () => setPage(value => (value + 1))
+  // 还原 SearchBarCityView.js 中的 page 页码, 将它还原成 default value
+  // 并将 updatePage 传到 SearcBarCityView 那里
+  const updatePage = () => setPage(1) 
+
+  // define previous page function. check if it is the first page value. 然后把prevPage传到button里
+  const prevPage = () => page > 1 && setPage(value => (value - 1)) 
+
   // Declare a new state variable called "selectedIndex"
   // create a state to store the index of clicked image from child component
   // set the intial value to the element of 0 index
@@ -59,7 +78,9 @@ function App() {
           // updateAName = {updateName}
           updateCityImg = {updateImgList}
           updateIndex = {updateIndex}    
-          
+          page = {page}
+          // 将 updatePage 传给 SearchBarCityView.js (line 58)
+          updatePage = {updatePage}
       />
       <hr/>
       {/* Parent component value is passed to child component
@@ -75,6 +96,9 @@ function App() {
         imgList = {imgList} 
         // 父传子，传个function
         updateIndex = {updateIndex}
+        // 通过父传子，达到子传子(SearchBarCityView to DisplayCityView)的作用。
+        nextPage = {nextPage}
+        prevPage = {prevPage}
       />
      {/* newName = {name} 
          conversionCityName = {conversion}   */}

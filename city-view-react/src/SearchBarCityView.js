@@ -6,12 +6,24 @@
 
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Loading } from "./Loading"
+import { unsplashKey, unsplashURL } from "./helper/constants"
 
 // unsplashkey is unique and comes from unsplash developer's App.
-const unsplashKey = 'cVWfiLOQxMydkNinizISK4yfjCh_3xmO7QvoIoLB8ZA'
-const unsplashURL = 'https://api.unsplash.com/search/photos'
+// save in constants.js file in helper folder
+// const unsplashKey = 'cVWfiLOQxMydkNinizISK4yfjCh_3xmO7QvoIoLB8ZA'
+// const unsplashURL = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
+export const SearchBarCityView = ({updateCityImg, updateIndex, page, updatePage}) => {
+
+    // 用console.log来检验 page 是否增加
+    console.log('page number in SearchBarCityView ==>', page);
+    // define isLoading state (true or false) state to control when to show loading component
+    // 一开始不显示，只有当hit enter 键，开始search的时候，才开始显示(即状态为true)
+    // hit enter的时候，把状态改成 true
+    const [isLoading, setIsLoading] = useState(false);
+
+
     // define state的变量为inputName, 因为名字一变化，就调用useEffect。
     const [inputName, setInputName] = useState('Toronto');
 
@@ -23,7 +35,11 @@ export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
     // 也会 call 一次 function
     // 需要搞懂的问题是：What does it mean to mount in React? What is a dependency in React?
     // 你可以去Google搜索，找个容易理解的解释。
-    useEffect(()=>{searchCity(inputName)}, [inputName])
+    // 其中的page，是App.js里定义的 const 中的 page，把state里面，定义的page，传到下面的function useEffect 里面去。
+    // 在line42行，增加一个page的 dependency，并在 App.js 中，还原 page 页码。
+    useEffect(()=>{
+        searchCity(inputName, page)
+    }, [inputName, page])
 
     // console.log(updateAName)
 
@@ -38,6 +54,9 @@ export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
         // print out "Enter" in the console
         // console.log(event.key) 
         if (event.key === 'Enter') {
+            // 将 page 的页码数，设置成默认值（default value)为1。（此处不用传参数，见App.js 的 line 21）
+            // 那么每次search bar里面，输入关键词，搜索的时候，背景图总是会显示第一个thumb nail的图片。
+            updatePage()
             // 当key down的时候，把updated index 归0
             updateIndex(0)
 
@@ -59,22 +78,28 @@ export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
 
     // define searchCity() function. (hoist, 所以可以定义在下面)
     // inputCity 是定义的变量，
-    const searchCity = inputCity => {
+    const searchCity = (inputCity, mypage) => {
         // console.log(inputCity)
         // fetch 方法,此处用第三方库，axios是promise based HTTP client for the browser and node.js
         // npmjs.com/package/axios, cmd line: npm install axios
-        // axios
+        // axios，asynchronize的一个function
         // https://api.unsplash.com/search/photos
         // client_id=${access_key}
         // &query=${searchCity}
         // &orientation=landscape
         // axios statement
+
+        // 开始loading
+        setIsLoading(true)
+
         axios.get(unsplashURL, {
             params: {
                 // 将searchCity这个方法里面的形参,传入到query里面,
                 // 就可以在keydown的时候,
                 query: inputCity,
-                orientation: 'landscape'
+                orientation: 'landscape',
+                // 前面的page 是param，后面的page是传进来的参数
+                page: mypage
             },
             headers: {
                 Authorization: `Client-ID ${unsplashKey}` // 用backtick
@@ -115,9 +140,16 @@ export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
                 
                 // 把父亲的imageList给填补上
                 updateCityImg(newRes)
+
+                // 拿到search的图片以后，将isLoading 设置成 false，表明search结束了
+                // 结束loading
+                setIsLoading(false)
             }
         )
-        .catch(err => console.log(err))       
+        .catch(err => {
+            setIsLoading(false)
+            console.log(err)
+        })       
     }
  
     return (
@@ -142,6 +174,10 @@ export const SearchBarCityView = ({updateCityImg, updateIndex}) => {
             <h3> {name} </h3>
             {/* 3. 定义一个<p>，显示在Input child下面 */}
             {/* <p> {name} </p> */}
+
+            {/* 定义一个isLoading这个变量，因为需要重新刷新，所以用useState */}
+            {isLoading && <Loading/>}
+            
         </div>
     )
 }

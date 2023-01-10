@@ -1,10 +1,20 @@
 import './DisplayCityView.scss'
+import './SearchBarCityView.js'
+import './PageButton.js'
+import { PageButton } from './PageButton.js'
 
 // function of display, descturction 写法
-export const DisplayCityView = ({imgList, updateIndex}) => {
+export const DisplayCityView = ({imgList, updateIndex, nextPage, prevPage}) => {
     return (
         <div className='display-city-view-container'>
-        {/* <div style={{border: '2px blue solid', width: '400px', height: '150px'}}>
+            {/* 增加两个button，一个是previous，一个是next */}
+
+            <PageButton label={'prev'} clickFun={prevPage}/>
+
+            {/* <button
+            onClick={prevPage}
+            >previous</button> */}
+            {/* <div style={{border: '2px blue solid', width: '400px', height: '150px'}}>
             <label htmlFor="">Please input a name  </label>
             <h3>Display Child</h3> */}
 
@@ -38,6 +48,23 @@ export const DisplayCityView = ({imgList, updateIndex}) => {
                 src={item.thumb} 
                 alt=""/>)
             }
+
+            {/* 子传子: 通过父组件(parent component)中的nextPage，传给DisplayCityView.js
+                从而达到，子(SearchBarCityView.js中的page, setPage这个function来更新page成nextPage）
+                传子（DisplayCityView.js中的nextPage）的目的。*/}
+            {/* 此时，还有个问题，当点击 next 这个 button 的时候， 大的背景图没有变化，这是为什么？
+                因为 dependency 没有变化。如何解决：需要将dependency 设置成 page，才会运行*/}
+            {/* <button 
+            // 这种写法，是需要传参数的情况下。
+            // onClick = {()=>{nextPage()}} 
+            onClick={nextPage}
+            >next
+            </button> */}
+
+            {/* 自定义的PageButton，可以重复使用在很多地方，这样设计出来的网页风格就会比较统一
+                button里面，还可以传元素：ionic.io/ionicons 
+                */}
+            <PageButton label={<ion-icon name="chevron-forward-outline"></ion-icon>} clickFun={nextPage}/>
 
         </div>
     )

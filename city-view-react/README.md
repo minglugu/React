@@ -148,3 +148,73 @@ npm i sass
 
 还有 增加左箭头和右箭头，在 SearchCityView.js 这个地方需要改动。 
 
+
+改进：user friendly.
+生成环境怎么处理：
+loading，产生的时效：从hit enter，到图片loading结束。用 && 来判断
+
+先在 SearchBarCityView.js 里面 增加 isLoading 的component
+isLoading 的初始值是 false
+当keyDownHandler的key down了， 当用户输入信息，userInputName改变，将userInputName传入setInputName()，来update useState。就会激活useEffect(),
+让searchCity()发生变化。searchCity 中的 axios，开始时，设置为true。
+并在loading结束后，设置为false。
+const searchCity = inputCity => {
+   setIsLoading
+}
+        
+额外补充的知识点：render 画面上，img lazy loading 的concept
+
+------------------------------------------------------------------]
+新建 city-view-advanced-loading-choose-page 
+git checkout -b city-view-advanced-loading-choose-page 
+加上一页和下一页，添加多页
+
+DisplayCityView.js
+
+unsplash documentation: https://unsplash.com/documentation#search-photos
+parameters:
+query	         Search terms.
+page	         Page number to retrieve. (Optional; default: 1)
+per_page	      Number of items per page. (Optional; default: 10)
+order_by	      How to sort the photos. (Optional; default: relevant). Valid values are latest and relevant.
+collections	   Collection ID(‘s) to narrow search. Optional. If multiple, comma-separated.
+content_filter	Limit results by content safety. (Optional; default: low). Valid values are low and high.
+color	         Filter results by color. Optional. Valid values are: black_and_white, black, white, yellow, orange, 
+               red, purple, magenta, green, teal, and blue.
+orientation	   Filter by photo orientation. Optional. (Valid values: landscape, portrait, squarish)
+
+在axios里面，增加page这个parameter
+axios.get(unsplashURL, {
+            params: {
+                // 将searchCity这个方法里面的形参,传入到query里面,
+                // 就可以在keydown的时候,
+                query: inputCity,
+                orientation: 'landscape',
+                page: 1
+            },。。。
+
+在项目里面，src里面，增加一个helper 这个 directory
+再建一个 file called constants.js
+
+知识点：the onload attribute fires when an object has been loaded. 
+是一个event，类似于onclick
+url: https://www.w3schools.com/tags/ev_onload.asp
+可以做成淘宝的图片，单独每个图片有个loading的图标
+
+基本完成功能了。需要改进的地方：
+- css style
+- alt 的description文字部分，可以做成animation：www.famer.com/motion/    这个库比较的popular
+
+小细节方面的知识点：
+使用 icon, font awesome
+
+做项目的时候，封装：
+1. 把相似的coding部分，比如说两个button，做成一个component，使用的时候，直接调用component。
+   在src文件夹下，建一个PageButton.js, 用来写 PageButton 这个component
+   写完button的label和style以后，如何将onClick这个function，传到previous 和 next 的 button上面？
+2. 使用同一种功能，那就写成一个function，需要时调用。
+
+除了在button上加文字外，还可以使用icon：ionic.io/ionicons 
+使用时，在usage标题栏里面，copy script，然后加到项目里的 public文件夹下面的 index.html 文件里面。
+然后在使用PageButton的时候，不传'next'这个名字，而是传icon。
+<PageButton label={<ion-icon name="chevron-forward-outline"></ion-icon>} clickFun={nextPage}/>
