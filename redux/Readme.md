@@ -37,9 +37,17 @@ steps of creating React project
 2. npm i redux
 3. npm i react-redux
 
-
-
-
 Reducers
 A reducer is a function that receives the current state and an action object, decides how to update the state if necessary, and returns the new state: (state, action) => newState. You can think of a reducer as an event listener which handles events based on the received action (event) type.
 
+新建三个文件夹：点击UI上面的按钮以后，找到actions文件夹里面对应的action，再找到reducer更新。
+actions:
+components: UI
+reducers
+
+写code的流程：
+1. components folder里，先写PlayConsole.js，此文件为 UI（用户界面）
+2. actions folder里，再写各种action.js 文件. 将其中使用到的变量写到helper.js里面，从而避免拼写错误。
+3. reducers folder里，写各种reducer.js的文件. 将其中使用到的变量写到helper.js里面，从而避免拼写错误。
+
+chrome extension: Redux DevTools, React Extension, 但是不好用

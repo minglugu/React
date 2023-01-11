@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import reducers from './reducers';
 
 // Provider component example
 // store(state)
 // create a store saved in the variable reduxStore which is used in store={reduxStore}
-const reduxStore = createStore() // 可以用来存reducer
+// 此处的reducers，就是songReducer，只是习惯用reducers，因为在reducers的index.js里面 是export default
+const reduxStore = createStore(reducers) // 可以用来存reducer
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +19,7 @@ root.render(
     // 将store传给Provider
     // 类似于父传子的component的概念
     <Provider store={reduxStore}> 
-      <App />
+      <App/>
     </Provider>
     
 
