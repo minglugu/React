@@ -6,15 +6,17 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // Provider component example
-
-const reduxStore = createStore()
+// store(state)
+// create a store saved in the variable reduxStore which is used in store={reduxStore}
+const reduxStore = createStore() // 可以用来存reducer
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
     // 加一个provider component
     // 将store传给Provider
-    <Provider store={reduxStore}>
+    // 类似于父传子的component的概念
+    <Provider store={reduxStore}> 
       <App />
     </Provider>
     
