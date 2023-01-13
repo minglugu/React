@@ -9,7 +9,8 @@ and any other data that it needs to describe the action.
 // a Redux store's dispatch and getState methods.
 
 
-import { songs, FETCH_ALL_SONGS, SELECT_SONG } from "../helpers/helper"
+import { songs, FETCH_ALL_SONGS, SELECT_SONG, musicStoreUrl } from "../helpers/helper"
+import axios from "axios";
 
 // This action is to fetch all the song list
 // This is the original code without adding thunk
@@ -41,14 +42,45 @@ import { songs, FETCH_ALL_SONGS, SELECT_SONG } from "../helpers/helper"
 // }
 
 //以上的fetchAllSongs，可以简化成下面的代码
-const fetchAllSongs = () => dispatch => {
-    // axios..   .then   .then来取到各种数据，用来取代helper.js中定义的常量songs
-    // 因为是举例，所以这里就用payload: songs来直接显示fetch到的所有歌曲。
-    dispatch({
-        type: FETCH_ALL_SONGS,
-        payload: songs
-    })
+// const fetchAllSongs = () => dispatch => {
+//     // axios..   .then   .then来取到各种数据，用来取代helper.js中定义的常量songs
+//     // 因为是举例，所以这里就用payload: songs来直接显示fetch到的所有歌曲。
+//     // get 到以后，就会获取promise，用.then
+//     // axios 访问 server musicStoreUrl, 返回 res。
+//     axios.get(musicStoreUrl)
+//         .then(
+//             // 打印出来后，歌单在Object.data.data里面，有25首歌曲,是个array
+//             res => {
+//                 console.log(res)
+//                 dispatch({
+//                     type: FETCH_ALL_SONGS,
+//                     payload: res.data.data
+//                 })
+//             }
+//         )
+//         .catch(error => console.log(error))
+
+//     // dispatch({
+//     //     type: FETCH_ALL_SONGS,
+//     //     payload: songs
+//     // })
+// }
+
+// another way to write fetchAllSongs. async and await pairs. 需要加上 try catch来捕获错误
+// 不用 .then和 .catch
+const fetchAllSongs = () => async dispatch => {
+    try {
+        let res = await axios.get(musicStoreUrl)
+        dispatch({
+            type: FETCH_ALL_SONGS,
+            payload: res.data.data
+        })
+    } catch(e) {
+        console.log(e);
+    }
 }
+
+
     // todo: fetch songs
     // console.log("Fetch all songs from a fetch action.")
     // return a plain JS object
@@ -59,14 +91,15 @@ const fetchAllSongs = () => dispatch => {
     // }
 
 
+
 // This action is to get each song.
 // render 每首歌，会激活另外一个action 叫selectSong, 拿到 id
-const selectSong = songID => {
-    return {
+const selectSong = songid => dispatch => {
+    dispatch ({
         type: SELECT_SONG, // do not hardcode, so save it as a constant in helper.js file
         // payload是传来的param，为songID
-        payload: songID     
-    }
+        payload: songid    
+    })
 }
 
 export{

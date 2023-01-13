@@ -6,7 +6,7 @@
 
 import { FETCH_ALL_SONGS, SELECT_SONG } from "../helpers/helper";
 
-// 定义一个initial state，里面包含了所有的state。这里的变量，目前是两个states。
+// 定义一个initial state，里面包含了所有的初始state。这里的变量，目前是两个states。
 // 所以下面的switch，只有两个cases，对应了不同的action.type
 const initialState = {
     songList: [], // 没有任何song的时候，为空

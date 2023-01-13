@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux'; // middleware是redux自己带的一个功能
 import reducers from './reducers';
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from "redux-devtools-extension";
+
 
 // Provider component example
 // store(state)
@@ -17,7 +19,7 @@ import thunk from 'redux-thunk';
 // URL: https://react-redux.js.org/api/hooks
 const reduxStore = createStore(
   reducers,     // 可以用来存reducer
-  applyMiddleware(thunk)      // 使用 thunk 的这个middleware. 在项目的根目录文件夹下的在terminal里面，输入 npm i redux-thunk
+  composeWithDevTools(applyMiddleware(thunk))      // 使用 thunk 的这个middleware. 在项目的根目录文件夹下的在terminal里面，输入 npm i redux-thunk
   ) 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -99,3 +99,70 @@ Here's what that data flow looks like visually
 
 2. render出来的东西，跟amazon相似。一行行的样子。dispatch selectSong，传id，改造reduder。
 playerConsole增加p标签，songId 
+
+判断网页是否用react做的，extension的地方，会显示react的图标是不是灰色的。
+
+学会JS以后，可以自己开发 extension 的小工具 (类似ad blocker或者React DevTools)
+Ad block的原理的tool：检查网页所有的class name是否带有ad的，或者自己建立一个黑名单，只要包含元素的(ad)，把display换成none，
+那么网页就没有广告了。但是自己做网页开发的时候，要注意，别block自己网页上面的东西。
+
+在Google里，装完Redux extension后，还需要在项目根目录的文件夹里面，装redux-devtools-extension的包(在terminal里面装 npm i redux-devtools-extension)
+使用redux，还需要加内容。在src的index.js文件里, import {composeWithDevTools} from "redux-devtools-extension";
+然后加上 composeWithDevTools(applyMiddleware(thunk)) 
+
+redux devtools是用来检测states的。网页运行以后，点击Redux devtools的extension的logo
+就能看state的状态，action等等
+
+问题：如何render音乐（用map）
+在PlayerConsole.js里，加这几行代码：
+        <ul>
+            {
+                // 对每一个song这个element，作为list返回。
+                songList.map((song, index) => 
+                    <li>
+                        <div>{song.name}</div>
+                        <div>{song.artist}</div>
+                        <div>{song.length}</div>
+
+                    </li>) 
+            }
+        </ul>
+
+用scss style一下。在项目的根目录下，装scss。npm i sass
+
+
+
+
+作业：做成amazon歌单的页面，点击每首歌，加个player的component，就能够播放相应的歌曲。
+
+歌曲的id怎么传。点击歌曲list，对应songActions的type，type变化了，会走到reducer的case SELECT_SONG这里，找到payload。所有song的id会相应改变。
+然后需要取出songId，传给<p>The selected ID is:</p>.怎么操作：从store里面，取songReducer的songId，const songId = useSelector(state => state?.songReducer?.songId). 然后把常量 songId 传给p标签：<p>The selected ID is: {songId}</p>
+
+怎么将hardcode的songs，改成从数据库里面，读取歌单。
+用axios fetch。
+1. songActions.js
+   fetchAllSongs这个function的code block里面用axios
+2. npm i axios in terminal
+3. axios.get('link').then.catch
+
+server里面，存的歌曲的信息 e.g.
+artist: "Calvin Harris"
+author: 
+cover:
+id:
+length:
+price:
+stream: "http://course-data.mark2win.com/songs/1.pm3"
+title:
+
+作业：将stream的这个link放到player里面。
+
+https://mark2win.com/zh
+
+自动对齐，快捷键：ctrl + alt + l
+
+load的时候，歌曲就会全部显示。component unmount，component didmount的时候，用 useEffect这个hook。
+
+知识点：
+- async await. 需要catch error。所以要加上try catch
+服务器出问题的时候，catch(error)
