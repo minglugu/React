@@ -7,3 +7,6 @@ npm start
 多页面之间的redirect routes的应用场景。用户点击一首歌，需要传歌曲的id。
 专门做一个player页面。可以将id传给该页面。写法如下。
         <Route path='/page3/:id' element={<Page3/>}/>
+
+
+@1:11:30

@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Route, Routes, Link, userParams, useNavigate, useLocation, useParams } from "react-router-dom";
+import { Route, Routes, Link, useNavigate, useLocation, useParams } from "react-router-dom";
 
 // 所有的components都写在这个文件里,所以不需要用export
 const MainPage = () => {
@@ -12,10 +12,10 @@ const MainPage = () => {
   )
 }
 
-const Page2 = () => {
+const Page1 = () => {
   return (
     <div>
-      <h1>This is page 2</h1>
+      <h1>This is page 1</h1>
       <Link to='/'>go to Main Page</Link>
     </div>
   )
@@ -44,35 +44,43 @@ const ProductPage = () => {
   )
 }
 
-const Page4 = () => {
-  const names = ['a', 'b', 'c']
-  const navigate = useNavigate()
+// nested links which are a, b, c: Route within Routes
+const Page3= () => {
+  const products = ['product1', 'product2', 'product3']
+  // const navigate = useNavigate()
   const location = useLocation()
   const search = location.search
-  const item = new URLSearchParams(search).get('item')
+  // const item = new URLSearchParams(search).get('item')
 
   return(
     <div>
-      <h2>Page4</h2>
-      {names.map((name, index) => {
+      <h2>Page3</h2>
+      {products.map((product, index) => {
         return(
           <div>
-            <Link to={'/page4/name_details/${name}'} key={index}>View {name}</Link>
+            {/* 包裹在Link里，当点击以后，会跳转到相关页面. 有${}, 用``backtick */}
+            <Link to={`/page3/product_details/${product}`} key={index}>View {product}</Link>
           </div>
         )
       })}
 
       <Routes>
-        <Route path='/name_details/:name' element={<NameDetails/>}/>
+        <Route path='/product_details/:name' element={<NameDetails/>}/>
       </Routes>
     </div>
   ) 
 }
 
+// NameDetails is a component used in Page3 component.
+// NameDetails is a subpage of page3 showing the product information. 
 const NameDetails = () => {
-  const params = useParams()
+  // The useParams hook returns an object of key/value pairs of the dynamic params 
+  // from the current URL that were matched by the <Route path>. 
+  // Child routes inherit all params from their parent routes.
+  const productName = useParams()
 
-  return <h2>Details of name {params.name}</h2>
+  // 拿到传过来的产品的名字
+  return <h2>Details of name {productName.name}</h2>
 }
 
 const NoMatch = () => {
@@ -98,8 +106,9 @@ const NavBar = () => {
           link的路径，是写在App()里面的<Route/>里
           <Route/> 也是‘react-router-dom’自带的*/}
       <Link to='/'>Main Page</Link>
-      <Link to='/page2'>Page 2</Link>
+      <Link to='/page1'>Page 1</Link>
       <Link to='/Product-Page/100'>Product Page</Link>
+      <Link to='/page3'>Page 3</Link>
     </nav>
   )
 }
@@ -111,11 +120,11 @@ function App() {
       <Routes>
         {/* '/' 设为主页。此处Page1是主页 */}
         <Route path='/' element={<MainPage/>}/>
-        <Route path='/page2' element={<Page2/>}/>
+        <Route path='/page1' element={<Page1/>}/>
         {/* 不是仅仅跳转到page3，还要传个值。此处是传个id。
             点开歌曲链接，单独进入一个播放的页面。 */}
         <Route path='/Product-Page/:id' element={<ProductPage/>}/>
-        <Route path='/page4/*' element={<Page4/>}/>
+        3<Route path='/page3/*' element={<Page3/>}/>
         <Route path='*' element={<NoMatch/>}/>
       </Routes>
     </div>
