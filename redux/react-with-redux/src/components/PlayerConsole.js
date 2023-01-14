@@ -7,6 +7,8 @@ import './PlayerConsole.scss'
 export const PlayerConsole = () => {
 
     // 使用hook useSelector, 是从 store 里面，取state，这里的作用是，来找到songList。
+    // useSelector的定义：When an action is dispatched, useSelector() will do 
+    // a reference comparison of the previous selector result value and the current result value.
     const songList = useSelector(state => state?.songReducer?.songList)
 
     // 从store里面，取songReducer的songId

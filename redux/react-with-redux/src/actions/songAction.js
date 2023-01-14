@@ -9,7 +9,7 @@ and any other data that it needs to describe the action.
 // a Redux store's dispatch and getState methods.
 
 
-import { songs, FETCH_ALL_SONGS, SELECT_SONG, musicStoreUrl } from "../helpers/helper"
+import { songs, FETCH_ALL_SONGS, SELECT_SONG, musicStoreUrl, MESSAGE } from "../helpers/helper"
 import axios from "axios";
 
 // This action is to fetch all the song list
@@ -71,15 +71,19 @@ import axios from "axios";
 const fetchAllSongs = () => async dispatch => {
     try {
         let res = await axios.get(musicStoreUrl)
+        console.log("fetching all songs is working! ");
         dispatch({
             type: FETCH_ALL_SONGS,
             payload: res.data.data
         })
     } catch(e) {
-        console.log(e);
+        console.log(e)
+        dispatch({
+            type: MESSAGE,
+            message: e.message
+        })
     }
 }
-
 
     // todo: fetch songs
     // console.log("Fetch all songs from a fetch action.")

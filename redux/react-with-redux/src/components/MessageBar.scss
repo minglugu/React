@@ -1,0 +1,10 @@
+.show{
+    display: block;
+    width: 100%; //相对于这个container的比例
+    background-color: red;
+}
+
+.hide{
+    display: none;
+    width: 100%;
+}

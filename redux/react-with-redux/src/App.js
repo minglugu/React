@@ -6,15 +6,18 @@
 // 当id是1的时候：course-data.mark2win.com/solo/1
 // 类似做unsplash cityview的感觉
 
+import { MessageBar } from "./components/MessageBar";
 import { PlayerConsole } from "./components/PlayerConsole";
 
 function App() {
   return (
     <div>
+
+      <MessageBar/>
       {/* 将这个PlayerConsole的component用在App里 */}
       <PlayerConsole/>
     </div>
-  );
+  )
 }
 
 export default App;

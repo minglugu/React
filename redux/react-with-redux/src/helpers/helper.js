@@ -2,6 +2,7 @@
 export const FETCH_ALL_SONGS = 'FETCH_ALL_SONGS'
 export const SELECT_SONG = 'SELECT_SONG'
 export const musicStoreUrl = 'http://course-data.mark2win.com/solo/' 
+export const MESSAGE = 'MESSAGE'
 // song list的常量
 export const songs = [
     {id: 1, title: 'One Kiss', artist: 'Taylor', length: 3.34},

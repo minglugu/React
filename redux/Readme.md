@@ -166,3 +166,10 @@ load的时候，歌曲就会全部显示。component unmount，component didmoun
 知识点：
 - async await. 需要catch error。所以要加上try catch
 服务器出问题的时候，catch(error)
+
+fetch 的时候，服务器跳出一个alert的提示
+component，叫message
+
+作业：增加音乐播放器。mp3 html audio：w3school
+
+class vs function的区别
