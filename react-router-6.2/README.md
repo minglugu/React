@@ -22,9 +22,15 @@ git branch --all                //找到自己的分支名
 输入q，就quit，进入项目文件夹下，进入自己的分支下work
 git checkout lu-router-2023-01-01（自己的分支名）
 
-布置一下作业：
+布置一下作业：@ 1:46:30
+music player: 优化播放器，用Router写2个页面，第一个页面是songlist。render出来后，点击list里面的一个音乐，就会跳到新页面。
+每个list有个红心，可以加入收藏夹。老师的样本页面中，ADD TO CART 可以改成 ADD TO FAVORITE
 
+MAIN PAGE: SONG LIST
+Player: 点击音乐后，跳出单独的音乐播放页面
+favorite：音乐收藏夹，可以用redux做。
 
+可以参照Amazon的页面
 
 
 
